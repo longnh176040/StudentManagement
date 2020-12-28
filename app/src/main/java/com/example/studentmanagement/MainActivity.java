@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         studentModels = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            studentModels.add(new StudentModel(i, faker.name.firstName(), faker.name.lastName() + "@gmail.com", faker.address.streetAddress(), faker.date.birthday(18, 22).toString()));
-        }
+//        for (int i = 0; i < 10; i++) {
+//            studentModels.add(new StudentModel(i, faker.name.firstName(), faker.name.lastName() + "@gmail.com", faker.address.streetAddress(), faker.date.birthday(18, 22).toString()));
+//        }
 
         File storagePath = getApplication().getFilesDir();
         String path = storagePath + "/" + "student_management_db";
@@ -90,18 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 DB.insert("students", null, rowValues);
             }
 
-            DB.close();
-            Toast toast = Toast.makeText(getApplicationContext(), "\nSUCCESS", Toast.LENGTH_LONG);
-            toast.show();
-        } catch (SQLException e) {
-            Log.v("ERROR", e.getMessage());
-            Toast toast = Toast.makeText(getApplicationContext(), "\nERROR " + e.getMessage(), Toast.LENGTH_LONG);
-            toast.show();
-        }
-
-        try {
-            DB = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-
             Cursor cursor = DB.rawQuery("select * from students", null);
             cursor.moveToPosition(-1);
 
@@ -114,9 +102,10 @@ public class MainActivity extends AppCompatActivity {
                         cursor.getString(cursor.getColumnIndex("dob"))
                 ));
             }
+
             cursor.close();
             DB.close();
-            Toast toast = Toast.makeText(getApplicationContext(), "\nSUCCESS access", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "\nSUCCESS", Toast.LENGTH_LONG);
             toast.show();
         } catch (SQLException e) {
             Log.v("ERROR", e.getMessage());
