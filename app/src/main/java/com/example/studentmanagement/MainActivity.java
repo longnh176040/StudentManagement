@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         studentModels = new ArrayList<>();
 
-//        for (int i = 0; i < 10; i++) {
-//            studentModels.add(new StudentModel(i, faker.name.firstName(), faker.name.lastName() + "@gmail.com", faker.address.streetAddress(), faker.date.birthday(18, 22).toString()));
-//        }
+        for (int i = 0; i < 10; i++) {
+            studentModels.add(new StudentModel(i, faker.name.firstName(), faker.name.lastName() + "@gmail.com", faker.address.streetAddress(), faker.date.birthday(18, 22).toString()));
+        }
 
         File storagePath = getApplication().getFilesDir();
         String path = storagePath + "/" + "student_management_db";
@@ -94,13 +94,13 @@ public class MainActivity extends AppCompatActivity {
             cursor.moveToPosition(-1);
 
             while (cursor.moveToNext()) {
-                studentModels.add(new StudentModel(
-                        cursor.getInt(cursor.getColumnIndex("id")),
-                        cursor.getString(cursor.getColumnIndex("name")),
-                        cursor.getString(cursor.getColumnIndex("address")),
-                        cursor.getString(cursor.getColumnIndex("email")),
-                        cursor.getString(cursor.getColumnIndex("dob"))
-                ));
+//                studentModels.add(new StudentModel(
+//                        cursor.getInt(cursor.getColumnIndex("id")),
+//                        cursor.getString(cursor.getColumnIndex("name")),
+//                        cursor.getString(cursor.getColumnIndex("address")),
+//                        cursor.getString(cursor.getColumnIndex("email")),
+//                        cursor.getString(cursor.getColumnIndex("dob"))
+//                ));
             }
 
             cursor.close();
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txt_add = info.findViewById(R.id.txt_add_dialog);
         TextView txt_email = info.findViewById(R.id.txt_email_dialog);
 
-        txt_id.setText(studentModels.get(position).id);
+        txt_id.setText(String.valueOf(studentModels.get(position).id));
         txt_name.setText(studentModels.get(position).name);
         txt_dob.setText(studentModels.get(position).doB.toString().trim());
         txt_add.setText(studentModels.get(position).address.trim());
